@@ -1,0 +1,31 @@
+<div class="back-button-row">
+    <button routerLink="/movies-list/" mat-fab extended color="primary">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+    </button>
+</div>
+
+<div class="details-text" *ngIf="currentMovie">
+    <h1>{{currentMovie.title}}</h1>
+    <mat-slide-toggle [checked]="currentMovie.addedToWatchlist" (click)="updateWatchlistState()">
+        {{currentWatchlistAction}}
+    </mat-slide-toggle>
+    <br>
+    <br>
+    <h5>
+        <span>
+            {{currentMovie.genre}}</span> -
+        <span>
+            {{currentMovie.duration}}</span> -
+        <span>&#9733; {{currentMovie.rating}}/10</span> -
+        <span>
+            Released on {{currentMovie.releaseDate | date : 'mediumDate'}}</span>
+    </h5>
+
+    <h3>{{currentMovie.description}}</h3>
+    <img class="movie-poster" src="{{currentMovie.imagePath}}" routerLink="/movie-details/{{currentMovie.id}}"
+        alt="Poster of the movie {{currentMovie.title}}">
+    <br>
+    <br>
+    <iframe width="560" height="315" [src]="currentMovie.trailerLink | safe" frameborder="0" allowfullscreen></iframe>
+</div>

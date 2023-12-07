@@ -1,0 +1,13 @@
+.back-button-row button,
+.back-button-row a {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.details-text {
+    color: white;
+}
+
+.movie-poster {
+  width: 350px;
+}

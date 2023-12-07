@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="left-wrapper">
+        <div class="main-movies-title">
+            <span>Main Movies</span>
+        </div>
+    </div>
+    <div class="right-wrapper">
+        <mat-form-field appearance="fill">
+            <mat-label>Sort by</mat-label>
+            <mat-select value="titleA">
+                <mat-option value="titleA" (click)="sortBy('title', 'asc')">Title: A - Z</mat-option>
+                <mat-option value="titleZ" (click)="sortBy('title', 'desc')">Title: Z - A</mat-option>
+                <mat-option value="mostRecent" (click)="sortBy('releaseDate', 'desc')">Most Recent
+                    Released</mat-option>
+                <mat-option value="leastRecent" (click)="sortBy('releaseDate', 'asc')">Least Recent
+                    Released</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="full-row">
+
+
+</div>
+
+<div class="movie-card" *ngFor="let movie of movies | orderBy : sortField : sortOrder">
+    <mat-card>
+        <mat-card-header class="movie-header">
+            <mat-card-title class="movie-title" routerLink="/movie-details/{{movie.id}}">
+                {{movie.title}}
+            </mat-card-title>
+            <mat-card-subtitle class="movie-subtitle">{{movie.genre}}</mat-card-subtitle>
+            <mat-card-actions>
+                <button *ngIf="!movie.addedToWatchlist" (click)="addToWatchlist(movie.id)" mat-fab
+                    matTooltip="Add to watchlist" color="primary" aria-label="Add to watchlist">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button *ngIf="movie.addedToWatchlist" (click)="removeFromWatchlist(movie.id)" mat-fab
+                    matTooltip="Remove from watchlist" color="primary" aria-label="Remove from watchlist">
+                    <mat-icon>check</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card-header>
+        <img class="movie-poster" routerLink="/movie-details/{{movie.id}}" mat-card-image [src]="movie.imagePath"
+            alt="Poster of the movie {{movie.title}}">
+    </mat-card>
+</div>
